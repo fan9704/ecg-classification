@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+albumentations = "*"
+efficientnet-pytorch = "*"
+future = "*"
+matplotlib = "*"
+numpy = "*"
+opencv-python = "*"
+pandas = "*"
+plotly = "*"
+scikit-learn = "*"
+scipy = "*"
+tensorboard = "*"
+torch = "*"
+torchvision = "*"
+tqdm = "*"
+wfdb = "*"
+pillow = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
