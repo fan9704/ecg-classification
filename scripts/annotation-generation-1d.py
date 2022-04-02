@@ -18,16 +18,17 @@ lead = "MLII"
 extension = "npy"  # or `png` for 2D
 data_path = osp.abspath("../data/*/*/*/*/*.{}".format(extension))
 val_size = 0.1  # [0, 1]
-
-output_path = "/".join(data_path.split("/")[:-5])
+print("PATH",data_path,"\n","/".join(data_path.split("\\")[:-5]))
+# output_path = "/".join(data_path.split("/")[:-5])
+output_path =  "/".join(data_path.split("\\")[:-5])
 random_state = 7
-
+print("OUTPUT_PATH",output_path)
 if __name__ == "__main__":
     dataset = []
     files = glob(data_path)
 
     for file in glob(data_path):
-        *_, name, lead, label, filename = file.split("/")
+        *_, name, lead, label, filename = file.split("\\")
         dataset.append(
             {
                 "name": name,
@@ -63,3 +64,4 @@ if __name__ == "__main__":
 
     with open(osp.join(output_path, "class-mapper.json"), "w") as file:
         file.write(json.dumps(d, indent=1))
+    print("Produce Success")
