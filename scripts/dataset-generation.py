@@ -74,7 +74,7 @@ if __name__ == "__main__":
                 two_dim_data_dir = osp.join(output_dir, "2D", name, sig_name, label)
                 os.makedirs(one_dim_data_dir, exist_ok=True)
                 os.makedirs(two_dim_data_dir, exist_ok=True)
-
+                print(one_dim_data_dir,two_dim_data_dir,peak,sep="\n")
                 filename = osp.join(one_dim_data_dir, "{}.npy".format(peak))
                 np.save(filename, signal[left:right])
                 filename = osp.join(two_dim_data_dir, "{}.png".format(peak))

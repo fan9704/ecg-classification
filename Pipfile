@@ -10,7 +10,7 @@ future = "*"
 matplotlib = "*"
 numpy = "*"
 opencv-python = "*"
-pandas = "0.25.3"
+pandas = "*"
 plotly = "*"
 scikit-learn = "*"
 scipy = "*"
@@ -19,7 +19,7 @@ torch = "*"
 torchvision = "*"
 tqdm = "*"
 wfdb = "*"
-pillow = "*"
+Pillow = "*"
 
 [dev-packages]
 

@@ -7,11 +7,13 @@ from tqdm import tqdm
 
 input_dir = "../mit-bih/*.atr"
 ecg_data = sorted([osp.splitext(i)[0] for i in glob(input_dir)])
+print(ecg_data)
 pbar = tqdm(total=len(ecg_data))
 
 
 def run(file):
-    params = ["python3", "dataset-generation.py", "--file", file]
+    params = ["pipenv","run","python", "dataset-generation.py", "--file", file]#Windows ver and add pipenv
+    #params = ["python3", "dataset-generation.py", "--file", file] #Linux ver
     subprocess.check_call(params)
     pbar.update(1)
 
