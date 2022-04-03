@@ -6,8 +6,8 @@ from glob import glob
 from tqdm import tqdm
 
 input_dir = "../mit-bih/*.atr"
-ecg_data = sorted([osp.splitext(i)[0] for i in glob(input_dir)])
-print(ecg_data)
+# ecg_data = sorted([osp.splitext(i)[0] for i in glob(input_dir)])#Sorted Produce
+ecg_data = sorted([osp.splitext(i)[0] for i in glob(input_dir)],reverse=True)#Reverse produce
 pbar = tqdm(total=len(ecg_data))
 
 

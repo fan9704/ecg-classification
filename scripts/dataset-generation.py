@@ -47,9 +47,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--file", required=True)
     args = parser.parse_args()
-
     ecg = args.file
     name = osp.basename(ecg)
+  
     record = rdrecord(ecg)
     ann = wfdb.rdann(ecg, extension="atr")
     for sig_name, signal in zip(record.sig_name, record.p_signal.T):
@@ -72,6 +72,9 @@ if __name__ == "__main__":
                 raise Exception("Wrong mode in script beginning")
             try:#Add Passing
                 if np.all([left > 0, right < len(signal)]):
+                    if label == "\'" or label =="\"" or label =="|":#other symbolic which is wrong
+                        print("Labelname",label,"Has Exception\n",name,sig_name,label)
+                        exit()
                     one_dim_data_dir = osp.join(output_dir, "1D", name, sig_name, label)
                     two_dim_data_dir = osp.join(output_dir, "2D", name, sig_name, label)
                     os.makedirs(one_dim_data_dir, exist_ok=True)
@@ -83,5 +86,5 @@ if __name__ == "__main__":
 
                     plot(signal[left:right], filename)
             except Exception as E:
-                # print(E)#Should Remove
+                print(E)#Should Remove
                 pass
