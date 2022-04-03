@@ -59,7 +59,7 @@ if __name__ == "__main__":
         for i, (label, peak) in enumerate(zip(ann.symbol, ann.sample)):
             if label == "/":
                 label = "\\"
-            print("\r{} [{}/{}]".format(sig_name, i + 1, len(ann.symbol)), end="")
+            # print("\r{} [{}/{}]".format(sig_name, i + 1, len(ann.symbol)), end="")#Should Remove
             if isinstance(mode, list):
                 if np.all([i > 0, i + 1 < len(ann.sample)]):
                     left = ann.sample[i - 1] + mode[0]
@@ -76,12 +76,12 @@ if __name__ == "__main__":
                     two_dim_data_dir = osp.join(output_dir, "2D", name, sig_name, label)
                     os.makedirs(one_dim_data_dir, exist_ok=True)
                     os.makedirs(two_dim_data_dir, exist_ok=True)
-                    print(one_dim_data_dir,two_dim_data_dir,peak,sep="\n")
+                    # print(one_dim_data_dir,two_dim_data_dir,peak,sep="\n")#Should Remove
                     filename = osp.join(one_dim_data_dir, "{}.npy".format(peak))
                     np.save(filename, signal[left:right])
                     filename = osp.join(two_dim_data_dir, "{}.png".format(peak))
 
                     plot(signal[left:right], filename)
             except Exception as E:
-                print(E)
+                # print(E)#Should Remove
                 pass
