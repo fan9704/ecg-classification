@@ -3,6 +3,8 @@ import os
 import os.path as osp
 
 import cv2
+import matplotlib
+matplotlib.use('agg') 
 import matplotlib.pyplot as plt
 import numpy as np
 import wfdb
@@ -32,7 +34,7 @@ def plot(signal, filename):
     # plt.margins(0, 0) # use for generation images with no margin
     plt.plot(signal)
     plt.savefig(filename)
-
+    plt.clf()#ADD Clean Current Plot
     plt.close()
 
     im_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -68,15 +70,18 @@ if __name__ == "__main__":
                 left, right = peak - mode // 2, peak + mode // 2
             else:
                 raise Exception("Wrong mode in script beginning")
+            try:#Add Passing
+                if np.all([left > 0, right < len(signal)]):
+                    one_dim_data_dir = osp.join(output_dir, "1D", name, sig_name, label)
+                    two_dim_data_dir = osp.join(output_dir, "2D", name, sig_name, label)
+                    os.makedirs(one_dim_data_dir, exist_ok=True)
+                    os.makedirs(two_dim_data_dir, exist_ok=True)
+                    print(one_dim_data_dir,two_dim_data_dir,peak,sep="\n")
+                    filename = osp.join(one_dim_data_dir, "{}.npy".format(peak))
+                    np.save(filename, signal[left:right])
+                    filename = osp.join(two_dim_data_dir, "{}.png".format(peak))
 
-            if np.all([left > 0, right < len(signal)]):
-                one_dim_data_dir = osp.join(output_dir, "1D", name, sig_name, label)
-                two_dim_data_dir = osp.join(output_dir, "2D", name, sig_name, label)
-                os.makedirs(one_dim_data_dir, exist_ok=True)
-                os.makedirs(two_dim_data_dir, exist_ok=True)
-                print(one_dim_data_dir,two_dim_data_dir,peak,sep="\n")
-                filename = osp.join(one_dim_data_dir, "{}.npy".format(peak))
-                np.save(filename, signal[left:right])
-                filename = osp.join(two_dim_data_dir, "{}.png".format(peak))
-
-                plot(signal[left:right], filename)
+                    plot(signal[left:right], filename)
+            except Exception as E:
+                print(E)
+                pass

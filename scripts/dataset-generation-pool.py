@@ -12,7 +12,7 @@ pbar = tqdm(total=len(ecg_data))
 
 
 def run(file):
-    params = ["pipenv","run","python", "dataset-generation.py", "--file", file]#Windows ver and add pipenv
+    params = ["python","-m","pipenv","run","python", "dataset-generation.py", "--file", file]#Windows ver and add pipenv
     #params = ["python3", "dataset-generation.py", "--file", file] #Linux ver
     subprocess.check_call(params)
     pbar.update(1)

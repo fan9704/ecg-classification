@@ -28,6 +28,7 @@ if __name__ == "__main__":
     files = glob(data_path)
 
     for file in glob(data_path):
+        print(file)
         *_, name, lead, label, filename = file.split("\\")
         dataset.append(
             {
@@ -38,6 +39,13 @@ if __name__ == "__main__":
                 "path": file,
             },
         )
+        print(            {
+                "name": name,
+                "lead": lead,
+                "label": label,
+                "filename": osp.splitext(filename)[0],
+                "path": file,
+            })
 
     data = pd.DataFrame(dataset)
     data = data[data["lead"] == lead]
